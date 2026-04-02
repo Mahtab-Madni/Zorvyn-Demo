@@ -17,8 +17,6 @@ FinVault is a **feature-complete** personal finance dashboard that demonstrates 
 - **Rich data visualization** with interactive charts
 - **Professional UI/UX** with glass-morphism design and smooth animations
 
-All requirements from the assignment are **fully implemented**, including several optional enhancements.
-
 ---
 
 ## Key Features
