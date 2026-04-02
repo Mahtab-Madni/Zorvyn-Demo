@@ -571,5 +571,3 @@ This dashboard demonstrates understanding of:
 Built with attention to clean code, user experience, and professional standards by Mahtab Madni.
 
 ---
-
-**Ready for evaluation. All features working. No backend required.**
