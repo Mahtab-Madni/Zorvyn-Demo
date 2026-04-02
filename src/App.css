@@ -1,0 +1,584 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* === BASE STYLES === */
+@layer base {
+  body {
+    @apply bg-navy-950 text-slate-100 min-h-screen;
+    font-family: "DM Sans", sans-serif;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    @apply w-1 h-1;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-navy-900;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate2-700 rounded-sm;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gold-500;
+  }
+}
+
+/* === COMPONENT LAYER === */
+@layer components {
+  /* Glass Card */
+  .glass-card {
+    @apply bg-gradient-to-br from-[rgba(255,255,255,0.06)] to-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.08)] rounded-2xl backdrop-blur-glass;
+  }
+
+  .glass-card-hover {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .glass-card-hover:hover {
+    @apply border-gold-500/30 -translate-y-0.5;
+    box-shadow: 0 0 30px rgba(212, 160, 23, 0.08);
+  }
+
+  /* Gold Text Gradient */
+  .gold-text {
+    @apply bg-gradient-to-r from-gold-300 via-gold-500 to-gold-600 bg-clip-text text-transparent;
+  }
+
+  /* Sidebar Navigation */
+  .sidebar {
+    @apply fixed left-0 top-0 h-screen w-64 flex flex-col z-40 bg-navy-900 border-r border-[rgba(255,255,255,0.05)];
+  }
+
+  .sidebar-link {
+    @apply relative w-full text-left transition-all duration-200 ease-out flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-body font-medium text-slate-600 hover:text-slate-200 hover:bg-[rgba(255,255,255,0.04)];
+  }
+
+  .sidebar-link.active {
+    @apply text-gold-500 bg-gold-500/10;
+  }
+
+  .sidebar-link.active::before {
+    @apply absolute left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-gold-300 to-gold-500 rounded-r;
+    content: "";
+  }
+
+  /* Stat Cards */
+  .stat-card {
+    @apply relative overflow-hidden;
+  }
+
+  .stat-card::after {
+    @apply absolute top-[-40px] right-[-40px] w-32 h-32 rounded-full opacity-5;
+    content: "";
+  }
+
+  .stat-income::after {
+    @apply bg-emerald-400;
+  }
+
+  .stat-expense::after {
+    @apply bg-rose-400;
+  }
+
+  .stat-balance::after {
+    @apply bg-gold-500;
+  }
+
+  .stat-savings::after {
+    @apply bg-blue-400;
+  }
+
+  /* Badges */
+  .badge-income {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[rgba(52,211,153,0.12)] text-emerald-400 border border-[rgba(52,211,153,0.2)] text-xs font-medium;
+  }
+
+  .badge-expense {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[rgba(251,113,133,0.12)] text-rose-400 border border-[rgba(251,113,133,0.2)] text-xs font-medium;
+  }
+
+  .badge-transfer {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[rgba(96,165,250,0.12)] text-blue-400 border border-[rgba(96,165,250,0.2)] text-xs font-medium;
+  }
+
+  /* Progress Bar */
+  .progress-bar {
+    @apply h-1.5 rounded-sm bg-[rgba(255,255,255,0.06)] overflow-hidden;
+  }
+
+  .progress-fill {
+    @apply h-full rounded-sm transition-all duration-1000 ease-out;
+  }
+
+  /* Search Input */
+  .search-input {
+    @apply bg-[rgba(255,255,255,0.04)] border border-[rgba(255,255,255,0.08)] text-slate-100 rounded-lg px-4 py-2.5 text-sm font-body outline-none transition-all duration-200;
+  }
+
+  .search-input:focus {
+    @apply border-[rgba(212,160,23,0.4)] bg-[rgba(255,255,255,0.06)];
+    box-shadow: 0 0 0 2px rgba(212, 160, 23, 0.08);
+  }
+
+  .search-input::placeholder {
+    @apply text-slate2-500;
+  }
+
+  select.search-input option {
+    @apply bg-navy-800 text-slate-100;
+  }
+
+  /* Role Badges */
+  .role-badge-admin {
+    @apply inline-flex items-center px-3 py-1 rounded-lg bg-gold-500/15 text-gold-300 border border-gold-500/30 text-xs font-semibold;
+  }
+
+  .role-badge-viewer {
+    @apply inline-flex items-center px-3 py-1 rounded-lg bg-[rgba(96,165,250,0.12)] text-blue-300 border border-[rgba(96,165,250,0.25)] text-xs font-semibold;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply px-4 py-2.5 rounded-xl text-sm font-medium font-body text-navy-950 font-semibold cursor-pointer border-none transition-all duration-200 ease-out bg-gradient-to-r from-gold-500 to-gold-600;
+  }
+
+  .btn-primary:hover {
+    @apply -translate-y-0.5;
+    box-shadow: 0 4px 20px rgba(212, 160, 23, 0.35);
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2.5 rounded-xl text-sm font-medium font-body text-slate-100 cursor-pointer border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.06)] transition-all duration-200 ease-out;
+  }
+
+  .btn-secondary:hover {
+    @apply bg-[rgba(255,255,255,0.1)] border-[rgba(255,255,255,0.2)];
+  }
+
+  .btn-secondary:disabled {
+    @apply opacity-30 cursor-not-allowed;
+  }
+
+  /* Table */
+  .table-row {
+    @apply transition-colors duration-150;
+  }
+
+  .table-row:hover {
+    @apply bg-[rgba(255,255,255,0.03)];
+  }
+
+  /* Modal */
+  .modal-backdrop {
+    @apply fixed inset-0 bg-navy-950/85 backdrop-blur-sm z-50 flex items-center justify-center;
+    animation: fadeSlideIn 0.2s ease;
+  }
+
+  .modal-box {
+    animation: fadeSlideIn 0.3s ease;
+  }
+
+  /* Mesh Background */
+  .mesh-bg {
+    @apply fixed inset-0 pointer-events-none z-0 bg-mesh-bg;
+  }
+
+  /* Insight Cards */
+  .insight-card {
+    @apply border-l-4;
+  }
+
+  .insight-gold {
+    @apply border-l-gold-500;
+  }
+
+  .insight-green {
+    @apply border-l-emerald-400;
+  }
+
+  .insight-red {
+    @apply border-l-rose-400;
+  }
+
+  .insight-blue {
+    @apply border-l-blue-400;
+  }
+
+  /* Tag Chip */
+  .tag-chip {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium font-body;
+  }
+
+  /* Empty State */
+  .empty-state {
+    @apply text-slate2-700;
+  }
+
+  /* Mobile Navigation */
+  .mobile-nav {
+    @apply hidden md:hidden;
+  }
+
+  /* Animation Delay Classes */
+  .delay-1 {
+    @apply animate-in;
+    animation-delay: 0.05s;
+    opacity: 0;
+  }
+
+  .delay-2 {
+    @apply animate-in;
+    animation-delay: 0.1s;
+    opacity: 0;
+  }
+
+  .delay-3 {
+    @apply animate-in;
+    animation-delay: 0.15s;
+    opacity: 0;
+  }
+
+  .delay-4 {
+    @apply animate-in;
+    animation-delay: 0.2s;
+    opacity: 0;
+  }
+
+  .delay-5 {
+    @apply animate-in;
+    animation-delay: 0.25s;
+    opacity: 0;
+  }
+
+  .delay-6 {
+    @apply animate-in;
+    animation-delay: 0.3s;
+    opacity: 0;
+  }
+}
+
+/* === UTILITIES === */
+@layer utilities {
+  /* Flex utilities */
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  /* Text utilities */
+  .truncate-2 {
+    @apply line-clamp-2;
+  }
+
+  /* Positioning utilities */
+  .inset-safe {
+    @apply inset-0;
+  }
+
+  /* Animation delays for Recharts */
+  .recharts-cartesian-grid-horizontal line,
+  .recharts-cartesian-grid-vertical line {
+    stroke: rgba(255, 255, 255, 0.05) !important;
+  }
+
+  .recharts-text {
+    @apply fill-slate2-500 font-mono text-xs;
+    fill: #4a5a80 !important;
+    font-family: "DM Mono", monospace !important;
+    font-size: 11px !important;
+  }
+
+  .recharts-tooltip-wrapper .recharts-default-tooltip {
+    @apply bg-navy-800 border border-gold-500/20 rounded-lg;
+    background: #0f2040 !important;
+    border: 1px solid rgba(212, 160, 23, 0.2) !important;
+    border-radius: 8px !important;
+    font-family: "DM Sans", sans-serif !important;
+  }
+
+  .recharts-legend-item-text {
+    @apply text-slate-400 font-body text-xs;
+    color: #94a3b8 !important;
+    font-family: "DM Sans", sans-serif !important;
+    font-size: 12px !important;
+  }
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .main-content {
+    @apply ml-0 !important;
+  }
+}
+
+.stat-income::after {
+  background: #34d399;
+}
+.stat-expense::after {
+  background: #fb7185;
+}
+.stat-balance::after {
+  background: #d4a017;
+}
+.stat-savings::after {
+  background: #60a5fa;
+}
+
+/* Badges */
+.badge-income {
+  background: rgba(52, 211, 153, 0.12);
+  color: #34d399;
+  border: 1px solid rgba(52, 211, 153, 0.2);
+}
+.badge-expense {
+  background: rgba(251, 113, 133, 0.12);
+  color: #fb7185;
+  border: 1px solid rgba(251, 113, 133, 0.2);
+}
+.badge-transfer {
+  background: rgba(96, 165, 250, 0.12);
+  color: #60a5fa;
+  border: 1px solid rgba(96, 165, 250, 0.2);
+}
+
+/* Progress Bar */
+.progress-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 1s ease;
+}
+
+/* Search Input */
+.search-input {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.search-input:focus {
+  border-color: rgba(212, 160, 23, 0.4);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 0 2px rgba(212, 160, 23, 0.08);
+}
+
+.search-input::placeholder {
+  color: #4a5a80;
+}
+
+select.search-input option {
+  background: #0f2040;
+  color: #e2e8f0;
+}
+
+/* Role Badges */
+.role-badge-admin {
+  background: rgba(212, 160, 23, 0.15);
+  color: #f5d78a;
+  border: 1px solid rgba(212, 160, 23, 0.3);
+}
+.role-badge-viewer {
+  background: rgba(96, 165, 250, 0.12);
+  color: #93c5fd;
+  border: 1px solid rgba(96, 165, 250, 0.25);
+}
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(135deg, #d4a017, #b8860b);
+  color: #050d1a;
+  font-weight: 600;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 4px 20px rgba(212, 160, 23, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e2e8f0;
+  transition: all 0.2s;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-secondary:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Table Row */
+.table-row {
+  transition: background 0.15s;
+}
+.table-row:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Animations */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation: fadeSlideIn 0.4s ease forwards;
+}
+
+.delay-1 {
+  animation-delay: 0.05s;
+  opacity: 0;
+}
+.delay-2 {
+  animation-delay: 0.1s;
+  opacity: 0;
+}
+.delay-3 {
+  animation-delay: 0.15s;
+  opacity: 0;
+}
+.delay-4 {
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+.delay-5 {
+  animation-delay: 0.25s;
+  opacity: 0;
+}
+.delay-6 {
+  animation-delay: 0.3s;
+  opacity: 0;
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 13, 26, 0.85);
+  backdrop-filter: blur(4px);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeSlideIn 0.2s ease;
+}
+
+.modal-box {
+  animation: fadeSlideIn 0.3s ease;
+}
+
+/* Mesh Background */
+.mesh-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(
+      ellipse at 20% 20%,
+      rgba(212, 160, 23, 0.04) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 80% 80%,
+      rgba(30, 61, 112, 0.3) 0%,
+      transparent 50%
+    ),
+    radial-gradient(ellipse at 50% 50%, rgba(5, 13, 26, 0) 0%, #050d1a 100%);
+}
+
+/* Insight Cards */
+.insight-card {
+  border-left: 3px solid;
+}
+.insight-gold {
+  border-color: #d4a017;
+}
+.insight-green {
+  border-color: #34d399;
+}
+.insight-red {
+  border-color: #fb7185;
+}
+.insight-blue {
+  border-color: #60a5fa;
+}
+
+/* Chart Styling */
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: rgba(255, 255, 255, 0.05) !important;
+}
+
+.recharts-text {
+  fill: #4a5a80 !important;
+  font-family: "DM Mono", monospace !important;
+  font-size: 11px !important;
+}
+
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: #0f2040 !important;
+  border: 1px solid rgba(212, 160, 23, 0.2) !important;
+  border-radius: 8px !important;
+  font-family: "DM Sans", sans-serif !important;
+}
+
+.recharts-legend-item-text {
+  color: #94a3b8 !important;
+  font-family: "DM Sans", sans-serif !important;
+  font-size: 12px !important;
+}
+
+/* Empty State */
+.empty-state {
+  color: #334266;
+}
+
+/* Tag Chip */
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
